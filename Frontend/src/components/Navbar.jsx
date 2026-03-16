@@ -27,9 +27,11 @@ const Navbar = () => {
 
           {/* Center navigation */}
           <div className="hidden md:flex items-center space-x-10">
-            <Link to="/features" className="text-sm font-medium text-gray-400 hover:text-white transition-colors duration-200">Features</Link>
-            <Link to="/how-it-works" className="text-sm font-medium text-gray-400 hover:text-white transition-colors duration-200">How It Works</Link>
+            <Link to="/" className="text-sm font-medium text-gray-400 hover:text-white transition-colors duration-200">Home</Link>
             <Link to="/jobs" className="text-sm font-medium text-gray-400 hover:text-white transition-colors duration-200">Jobs</Link>
+            <Link to="/companies" className="text-sm font-medium text-gray-400 hover:text-white transition-colors duration-200">Companies</Link>
+            <Link to="/students" className="text-sm font-medium text-gray-400 hover:text-white transition-colors duration-200">Students</Link>
+            <Link to="/about" className="text-sm font-medium text-gray-400 hover:text-white transition-colors duration-200">About</Link>
           </div>
 
           {/* Right: Actions */}
@@ -48,13 +50,21 @@ const Navbar = () => {
                 </button>
               </>
             ) : (
-              location.pathname !== '/login' && (
-                <Link
-                  to="/login"
-                  className="bg-yellow-400 hover:bg-yellow-300 text-black text-sm font-bold px-5 py-2.5 rounded-lg transition-all duration-300 shadow-[0_0_15px_rgba(250,204,21,0.15)] hover:shadow-[0_0_20px_rgba(250,204,21,0.3)] hover:-translate-y-0.5 transform"
-                >
-                  Login
-                </Link>
+              location.pathname !== '/login' && location.pathname !== '/signup' && (
+                <>
+                  <Link
+                    to="/login"
+                    className="border border-purple-700 text-white text-sm font-bold px-4 py-2 rounded-lg hover:bg-purple-900/30 transition-all duration-300"
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    to="/signup"
+                    className="bg-yellow-400 hover:bg-yellow-300 text-black text-sm font-bold px-5 py-2 rounded-lg transition-all duration-300"
+                  >
+                    Sign Up
+                  </Link>
+                </>
               )
             )}
           </div>

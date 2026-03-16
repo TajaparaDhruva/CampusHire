@@ -70,44 +70,47 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen pt-20 flex flex-col items-center justify-center bg-[#0F0B1A] p-4 relative overflow-hidden">
+    <div className="min-h-screen pt-20 flex flex-col items-center justify-center bg-[#020617] p-4 relative overflow-hidden">
+
+      {/* Grid Background */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b33_1px,transparent_1px),linear-gradient(to_bottom,#1e293b33_1px,transparent_1px)] bg-[size:40px_40px] z-0 pointer-events-none"></div>
 
       {/* Background glowing effects */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600/20 rounded-full blur-[120px] pointer-events-none"></div>
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-[100px] pointer-events-none"></div>
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-yellow-400/10 rounded-full blur-[120px] pointer-events-none z-0"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-yellow-400/5 rounded-full blur-[100px] pointer-events-none z-0"></div>
 
       <div className="w-full max-w-md relative z-10">
 
         {/* Toggle Buttons */}
-        <div className="flex bg-[#1A1625] border border-purple-900 rounded-lg p-1.5 mb-6 shadow-xl backdrop-blur-sm relative">
+        <div className="flex bg-[#020617] border border-gray-800 rounded-lg p-1.5 mb-6 shadow-xl backdrop-blur-sm relative">
           <button
             onClick={() => setLoginType('student')}
             className={`flex-1 py-2.5 text-sm font-semibold rounded-md transition-all duration-300 relative z-10 ${loginType === 'student'
-              ? 'text-purple-400'
+              ? 'text-yellow-400'
               : 'text-gray-500 hover:text-gray-300'
               }`}
           >
             Student Login
             {loginType === 'student' && (
-              <div className="absolute inset-0 bg-[#0F0B1A] border border-purple-900/50 rounded-md -z-10 shadow-[0_0_10px_rgba(168,85,247,0.1)]"></div>
+              <div className="absolute inset-0 bg-[#020617] border border-gray-700/50 rounded-md -z-10 shadow-[0_0_15px_rgba(250,204,21,0.1)]"></div>
             )}
           </button>
           <button
             onClick={() => setLoginType('company')}
             className={`flex-1 py-2.5 text-sm font-semibold rounded-md transition-all duration-300 relative z-10 ${loginType === 'company'
-              ? 'text-purple-400'
+              ? 'text-yellow-400'
               : 'text-gray-500 hover:text-gray-300'
               }`}
           >
             Company Login
             {loginType === 'company' && (
-              <div className="absolute inset-0 bg-[#0F0B1A] border border-purple-900/50 rounded-md -z-10 shadow-[0_0_10px_rgba(168,85,247,0.1)]"></div>
+              <div className="absolute inset-0 bg-[#020617] border border-gray-700/50 rounded-md -z-10 shadow-[0_0_15px_rgba(250,204,21,0.1)]"></div>
             )}
           </button>
         </div>
 
         {/* Login Card */}
-        <div className="bg-[#1A1625]/90 backdrop-blur-xl rounded-2xl shadow-2xl p-8 border border-purple-900/80 transition-all duration-500 hover:border-purple-800 hover:shadow-purple-500/5 group">
+        <div className="bg-[#020617]/90 backdrop-blur-xl rounded-2xl shadow-2xl p-8 border border-gray-800 transition-all duration-500 hover:border-gray-700 hover:shadow-yellow-500/5 group">
 
           <div className="text-center mb-8">
             <h2 className="text-3xl font-extrabold tracking-tight text-white mb-2">
@@ -138,7 +141,7 @@ const Login = () => {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-3 bg-[#0F0B1A] border border-purple-900 rounded-lg text-white placeholder-gray-600 focus:outline-none focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 transition-all hover:border-purple-800"
+                className="w-full px-4 py-3 bg-[#020617] border border-gray-800 rounded-lg text-white placeholder-gray-600 focus:outline-none focus:border-yellow-500/50 focus:ring-1 focus:ring-yellow-500/50 transition-all hover:border-gray-700"
                 placeholder={loginType === 'student' ? 'student@email.com' : 'company@email.com'}
               />
             </div>
@@ -158,7 +161,7 @@ const Login = () => {
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-4 py-3 bg-[#0F0B1A] border border-purple-900 rounded-lg text-white placeholder-gray-600 focus:outline-none focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 transition-all hover:border-purple-800 pr-12"
+                  className="w-full px-4 py-3 bg-[#020617] border border-gray-800 rounded-lg text-white placeholder-gray-600 focus:outline-none focus:border-yellow-500/50 focus:ring-1 focus:ring-yellow-500/50 transition-all hover:border-gray-700 pr-12"
                   placeholder="Enter password"
                 />
                 <button
@@ -181,10 +184,10 @@ const Login = () => {
             </button>
           </form>
 
-          <div className="mt-8 text-center pt-6 border-t border-purple-900/80">
+          <div className="mt-8 text-center pt-6 border-t border-gray-800">
             <p className="text-gray-400 text-sm font-medium">
               Don't have an account?{' '}
-              <Link to="/signup" className="text-white hover:text-yellow-400 transition-colors ml-1 font-semibold underline underline-offset-4 decoration-purple-600 hover:decoration-yellow-400">
+              <Link to="/signup" className="text-white hover:text-yellow-400 transition-colors ml-1 font-semibold underline underline-offset-4 decoration-gray-600 hover:decoration-yellow-400">
                 Sign up as {loginType === 'student' ? 'Student' : 'Company'}
               </Link>
             </p>

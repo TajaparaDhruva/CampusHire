@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Navbar from './components/Navbar';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import Home from './pages/Home';
 
 const Dashboard = () => (
   <div className="min-h-screen pt-20 flex flex-col items-center justify-center bg-[#0F0B1A]">
@@ -15,7 +16,7 @@ function App() {
     <Router>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Navigate to="/login" replace />} />
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/dashboard" element={<Dashboard />} />
