@@ -1,11 +1,17 @@
 const User = require('../models/User');
+const bcrypt = require('bcryptjs');
 
 exports.login = async (req, res) => {
     try {
         const { email, password } = req.body;
         
         const user = await User.findOne({ email });
-        if (!user || user.password !== password) {
+        if (!user) {
+            return res.status(401).json({ message: 'Invalid email or password' });
+        }
+        
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
             return res.status(401).json({ message: 'Invalid email or password' });
         }
         
@@ -23,8 +29,12 @@ exports.studentLogin = async (req, res) => {
         const { email, password } = req.body;
         
         const user = await User.findOne({ email, role: 'student' });
-        // Instead of strict role checking (since they may not have roles seeded properly), we can just check email/password, but let's strictly check role for accuracy.
-        if (!user || user.password !== password) {
+        if (!user) {
+            return res.status(401).json({ message: 'Invalid student credentials' });
+        }
+        
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
             return res.status(401).json({ message: 'Invalid student credentials' });
         }
         
@@ -42,7 +52,12 @@ exports.companyLogin = async (req, res) => {
         const { email, password } = req.body;
         
         const user = await User.findOne({ email, role: 'company' });
-        if (!user || user.password !== password) {
+        if (!user) {
+            return res.status(401).json({ message: 'Invalid company credentials' });
+        }
+        
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
             return res.status(401).json({ message: 'Invalid company credentials' });
         }
         
@@ -50,6 +65,48 @@ exports.companyLogin = async (req, res) => {
             message: 'Company login successful',
             user: { id: user._id, name: user.name, email: user.email, role: user.role }
         });
+    } catch (error) {
+        return res.status(500).json({ message: 'Server error', error: error.message });
+    }
+};
+
+exports.studentRegister = async (req, res) => {
+    try {
+        const { name, email, password, skills } = req.body;
+        
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(400).json({ message: 'Email already exists' });
+        }
+        
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+        
+        const user = new User({ name, email, password: hashedPassword, role: 'student', skills });
+        await user.save();
+        
+        return res.status(201).json({ message: 'Student registered successfully' });
+    } catch (error) {
+        return res.status(500).json({ message: 'Server error', error: error.message });
+    }
+};
+
+exports.companyRegister = async (req, res) => {
+    try {
+        const { name, email, password, companyName } = req.body;
+        
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(400).json({ message: 'Email already exists' });
+        }
+        
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+        
+        const user = new User({ name, email, password: hashedPassword, role: 'company', companyName });
+        await user.save();
+        
+        return res.status(201).json({ message: 'Company registered successfully' });
     } catch (error) {
         return res.status(500).json({ message: 'Server error', error: error.message });
     }
