@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Home from './pages/Home';
+import Jobs from './pages/Jobs';
 
 const Dashboard = () => (
   <div className="min-h-screen pt-20 flex flex-col items-center justify-center bg-[#0F0B1A]">
@@ -19,6 +20,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/jobs" element={<Jobs />} />
         <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </Router>
